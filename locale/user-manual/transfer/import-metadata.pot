@@ -1,0 +1,381 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Artefactual Systems Inc.
+# This file is distributed under the same license as the Archivematica package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Archivematica 1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-07 14:42-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../user-manual/transfer/import-metadata.rst:5
+msgid "Import metadata"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:7
+msgid "This page documents the workflow and METS content for lower-level metadata import - i.e. metadata to be attached to subdirectories and files within a SIP."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:12
+msgid "Workflow"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:14
+msgid "1. For simple objects, the user places files in the objects directory, with or without intervening subdirectories. The imported metadata are attached to each object."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:24
+msgid "Metadata folder in transfer directory contains metadata.csv file"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:32
+msgid "Example csv file contents"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:35
+msgid "2. For compound objects, the user creates one or more subdirectories in the objects directory, each containing the files that form a compound object. The imported metadata are attached to each subdirectory."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:41
+msgid "The subdirectory names must not contain spaces or other forbidden characters."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:43
+msgid "3. The user adds a csv file to the metadata folder for the transfer entitled metadata.csv"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:46
+msgid "The first row of the csv file consists of field names. Field names must not include spaces."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:49
+msgid "Dublin Core field names must contain the \"dc\" element in the name, eg \"dc.title\""
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:52
+msgid "Each subsequent row contains the complete set of field values for a single directory or file."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:55
+msgid "For multi-value fields (such as dc.subject), the entire column is repeated and each column contains a single value."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:58
+msgid "If the metadata are for simple objects, the csv file must contain a \"filename\" column listing the filepath and filename of each objects: eg \"objects/BrocktonOval.jp2\""
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:62
+msgid "If the metadata are for compound objects, the csv file must contain a \"parts\" column listing the names of the directories containing the items that form the compound object: eg \"objects/Jan021964\""
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:66
+msgid "Note that filenames can be duplicates of filenames in other subdirectories if desired. For example, the name \"page01.jp2\" can occur in multiple subdirectories."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:70
+msgid "4. At the generate METS micro-service, Archivematica parses the metadata in metadata.csv to the METS file, as follows:"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:73
+msgid "All Dublin Core elements are used to generate a dmdSec for each directory or file with MDTYPE=\"DC\""
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:76
+msgid "All non-Dublin Core elements are used to generate a dmdSec for each directory or file with MDTYPE=\"OTHER\" OTHERMDTYPE=\"CUSTOM\""
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:79
+msgid "The dmdSecs are linked to their directories or files in the structMap"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:83
+msgid "Simple objects"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:85
+msgid "This section provides csv file and METS file examples for simple objects - i.e. individual files that are not pages in a compound object such as a book or a newspaper issue."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:89
+#: ../user-manual/transfer/import-metadata.rst:197
+msgid "**CSV file**"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:91
+#: ../user-manual/transfer/import-metadata.rst:199
+msgid "Sample headings and values"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "filename"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dc.title"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "dcterms.issued"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dc.publisher"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "dc.contributor"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dc.subject"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dc.date"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dc.description"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "notes"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "dcterms.isPartOf"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "repository"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "dc.rights"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "project_website"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:94
+msgid "dc.format"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "objects/BrocktonOval.jp2"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "Stanley Park in December"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "1996-01-17"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "Riley Studios, Vancouver BC"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "Don Langfield, photographer"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "Vancouver (B.C.)--Parks"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "Landscapes"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "1992/12/04"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "Image shows Brockton Oval after light snowfall"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+msgid "Originally part of series entitled \"Winter in Vancouver\""
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "Riley Studios collection"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "New Caledonia Public Library"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "Copyright held by Riley Studios"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "http://www.ncpl/donlangfieldphotographs.ca"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:96
+#: ../user-manual/transfer/import-metadata.rst:98
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "image/jp2"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "objects/QEParksunset.jp2"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "Sunset in Queen Elizabeth Park"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:98
+msgid "1994/07/13"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:102
+#: ../user-manual/transfer/import-metadata.rst:209
+msgid "**METS file**"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:192
+msgid "Compound objects"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:194
+msgid "This section provides csv file and METS file examples for compound objects - i.e. multi-page digital objects such as newspapers and books."
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "parts"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "alternative_title"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dates_of_publication"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "frequency"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "dc.language"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "forms_part_of"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:202
+msgid "digital_file_format"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+msgid "objects/Jan021964"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+msgid "Coast News, January 02, 1964"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Sunshine Coast News"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Fred Cruice"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "1945-1995"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Gibsons (B.C.)--Newspapers"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+msgid "1964/01/02"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Serving the Growing Sunshine Coast"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Weekly"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "English"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "British Columbia Historical Newspapers collection"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Sunshine Coast Museum and Archives"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:204
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "http://historicalnewspapers.library.ubc.ca"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "objects/Jan091964"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "Coast News, January 09, 1964"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:205
+msgid "1964/01/09"
+msgstr ""
+
+#: ../user-manual/transfer/import-metadata.rst:314
+msgid ":ref:`Back to the top <import-metadata>`"
+msgstr ""
+
