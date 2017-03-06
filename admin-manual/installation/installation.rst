@@ -39,7 +39,9 @@ Technical Requirements
 ======================
 
 **Operating System** 
+
 Archivematica 1.6.0 has been tested with:
+
 * Ubuntu 14.04.5 64 bit Server Edition
 * CentOS 7.3.1611 64 bit
 
