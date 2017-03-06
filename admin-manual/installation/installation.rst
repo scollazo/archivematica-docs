@@ -56,26 +56,32 @@ Archivematica is unlikely to ever run in a Windows environment.  Consider the
 use of a virtualization platform to run linux vm's. 
 
 **Hardware**
+
 Archivematica is capable of running on almost any hardware supported by linux; 
 however, processing large collections will require better hardware. See
+
 * :ref:`Minimum Hardware Requirements <requirements-small>`
 * :ref:`Recommended Minimum Production Requirements <requirements-production>`
 
 **Dependencies**
+
 Archivematica has a long list of software it depends on.  All of these 
 dependencies are intalled when following the instructions below.
 
 In these instructions everything is installed into one machine.  It is possible
 to install some of the components on separate machines, to improve performance,
 such as:
+
 *MySQL
 *ElasticSearch
 *gearman
 
 Using additional machines requires some additional configuration.
+
 See :ref:`Advanced <advanced>`.
 
 **Notes**: 
+
 Archivematica 1.6.0 requires ElasticSearch 1.x (tested with 1.7.5).
 Support for ElasticSearch 2.x and 5.x is being developed and is planned for a 
 future release.
@@ -152,7 +158,7 @@ Installing Ubuntu Packages
 Archivematica packages are hosted at packages.archivematica.org. This has been 
 introduced to allow one central place to store packages for multiple os'es.
 
-#. Add Package Sources
+1. Add Package Sources
 
 * Archivematica
 
