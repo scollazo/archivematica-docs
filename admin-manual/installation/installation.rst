@@ -661,7 +661,18 @@ Upgrade on Ubuntu
 
    sudo apt-get update && sudo apt-get upgrade
 
-2. Update Package Sources
+2. Update pip
+
+This is used to install python dependencies for both the storage service and 
+the dashboard.  There is a _known issue: https://bugs.launchpad.net/ubuntu/+source/python-pip/+bug/1658844 with the version of pip installed on 
+Ubuntu 14.04, which makes this step necessary.
+
+.. code:: bash
+
+   wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+   sudo python /tmp/get-pip.py
+
+3. Update Package Sources
 
 .. code:: bash
 
@@ -672,7 +683,7 @@ Upgrade on Ubuntu
 
 Optionally you can remove the lines references packages.archivematica.org/1.5.x from /etc/apt/sources.list.
 
-3. Update Archivematica Storage Services
+4. Update Archivematica Storage Services
 
 
 .. code:: bash
@@ -680,7 +691,7 @@ Optionally you can remove the lines references packages.archivematica.org/1.5.x 
    sudo apt-get update
    sudo apt-get install archivematica-storage-service
 
-4. Update Application Container
+5. Update Application Container
 
 Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means that the old uwsgi server needs to be stopped and disabled after perfoming the upgrade.
 
@@ -689,7 +700,7 @@ Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means th
 +   sudo service uwsgi stop
 +   sudo update-rc.d uwsgi disable
 
-5. Update Archivematica
+6. Update Archivematica
 
 During the update process you may be asked about updating configuration files.
 Choose to accept the maintainers versions. You will also be asked about
@@ -701,7 +712,7 @@ better to update the dashboard before updating the mcp components.
 
    sudo apt-get upgrade
    
-6. Disable Unused Services
+7. Disable Unused Services
 
 Archivematica 1.6.0 uses nginx as http server, and gunicorn as wsgi server. This means that some services used in Archivematica 1.5.0 should be stopped and disabled before performing the upgrade.
 
@@ -711,7 +722,7 @@ sudo service apache2 stop
 sudo update-rc.d apache2 disable
 
 
-7. Restart Services
+8. Restart Services
 
 .. code:: bash
 
@@ -732,6 +743,11 @@ try this command instead:
 
    sudo restart gearman-job-server
 
+9. Remove unused services
+
+.. code:: bash
+
+    sudo apt-get remove --purge python-pip apache2 uwsgi
 
 .. _upgrade-centos:
 
