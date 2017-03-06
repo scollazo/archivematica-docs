@@ -199,7 +199,7 @@ the software from the PPAs you just added to your system.
 5. Install pip.  
 
 This is used to install python dependencies for both the storage service and 
-the dashboard.  There is a known issue with the version of pip installed on 
+the dashboard.  There is a _known issue: https://bugs.launchpad.net/ubuntu/+source/python-pip/+bug/1658844 with the version of pip installed on 
 Ubuntu 14.04, which makes this step necessary.
 
 .. code:: bash
@@ -632,14 +632,39 @@ these instructions do not cover that scenario.
 Upgrade on Ubuntu
 -----------------
 
-1. Update pip
+1. Backup
 
-This is used to install python dependencies for both the storage service and 
-the dashboard.  There is a known issue with the version of pip installed on 
-Ubuntu 14.04, which makes this step necessary.
+Before starting any upgrade procedure on a production system, it is prudent to
+back up your system.  If you are using a virtual machine, take a snapshot of it
+before making any changes.  Alternatively, back up the file systems being used
+by your system.  Exact procedures for updating will depend on your local 
+installation.   At a minimum you should make backups of:
+
+* the storage service sqlite database
+* the dashboard mysql database
+
+A simple example of backing up these two databases:
 
 .. code:: bash
 
+   sudo cp /var/archivematica/storage-service/storage.db ~/storage_db_backup.db
+   mysqldump -u root -p MCP > ~/am_backup.sql
+
+If you do not have a password set for the root user in mysql, you can take out
+the '-p' portion of that command. If there is a problem during the upgrade
+process, you can restore your mysql database from this backup and try the
+upgrade again.
+
+
+2. Update pip
+
+This is used to install python dependencies for both the storage service and 
+the dashboard.  There is a _known issue: https://bugs.launchpad.net/ubuntu/+source/python-pip/+bug/1658844
+with the version of pip installed on Ubuntu 14.04, which makes this step necessary.
+
+.. code:: bash
+
+   sudo apt-get remove python-pip
    wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
    sudo python /tmp/get-pip.py
 
@@ -652,29 +677,26 @@ Ubuntu 14.04, which makes this step necessary.
    echo 'deb [arch=amd64] http://packages.archivematica.org/1.6.x/ubuntu trusty main' >> /etc/apt/sources.list
    echo 'deb [arch=amd64] http://packages.archivematica.org/1.6.x/ubuntu-externals trusty main' >> /etc/apt/sources.list
 
+Optionally you can remove the lines references packages.archivematica.org/1.5.x from /etc/apt/sources.list.
+
 3. Update Archivematica Storage Services
+
 
 .. code:: bash
 
    sudo apt-get update
    sudo apt-get install archivematica-storage-service
 
+4. Update Application Container
 
-4. Update Archivematica
-
-It is always a good idea to make a backup of your archivematica database
-before performing any updates. Exact procedures for updating will depend on
-your local installation, but a simple example would be to use mysqldump:
+Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means that the old uwsgi server needs to be stopped and disabled after perfoming the upgrade.
 
 .. code:: bash
 
-   mysqldump -u root -p MCP > ~/am_backup.sql
++   sudo service uwsgi stop
++   sudo update-rc.d uwsgi disable
 
-
-If you do not have a password set for the root user in mysql, you can take out
-the '-p' portion of that command. If there is a problem during the upgrade
-process, you can restore your mysql database from this backup and try the
-upgrade again.
+5. Update Archivematica
 
 During the update process you may be asked about updating configuration files.
 Choose to accept the maintainers versions. You will also be asked about
