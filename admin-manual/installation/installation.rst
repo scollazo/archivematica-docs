@@ -596,9 +596,9 @@ machine you have been installing on).
 
 Create a new administrative user in the Storage service. The storage service 
 has its own set of users. In the User menu in the Administrative tab of the 
-storage service, add at least one administrative user, and delete or modify the
-test user. After you have created an administrative user, copy its API key to 
-your clipboard.
+storage service, add at least one administrative user, and modify the
+test user, to change the password at a minimum. After you have created 
+an administrative user, copy its API key to your clipboard.
 
 3. Test the dashboard 
 
