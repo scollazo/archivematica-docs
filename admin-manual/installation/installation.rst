@@ -582,7 +582,8 @@ See :ref:`Post Install Configuration <post-install-config>`
 Post Install Configuration
 --------------------------
 
- successfully completing a new installation
+After successfully completing a new installation using one of the methods 
+above, follow these steps to complete the configuration of your new server. 
 
 1. Test the storage service
 
