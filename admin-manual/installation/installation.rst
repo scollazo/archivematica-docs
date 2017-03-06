@@ -654,8 +654,14 @@ upgrade again.
 
 Upgrade on Ubuntu
 -----------------
+ 
+1. Update OS 
 
-1. Update Package Sources
+.. code:: bash
+
+   sudo apt-get update && sudo apt-get upgrade
+
+2. Update Package Sources
 
 .. code:: bash
 
@@ -666,7 +672,7 @@ Upgrade on Ubuntu
 
 Optionally you can remove the lines references packages.archivematica.org/1.5.x from /etc/apt/sources.list.
 
-2. Update Archivematica Storage Services
+3. Update Archivematica Storage Services
 
 
 .. code:: bash
@@ -674,7 +680,7 @@ Optionally you can remove the lines references packages.archivematica.org/1.5.x 
    sudo apt-get update
    sudo apt-get install archivematica-storage-service
 
-3. Update Application Container
+4. Update Application Container
 
 Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means that the old uwsgi server needs to be stopped and disabled after perfoming the upgrade.
 
@@ -683,7 +689,7 @@ Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means th
 +   sudo service uwsgi stop
 +   sudo update-rc.d uwsgi disable
 
-4. Update Archivematica
+5. Update Archivematica
 
 During the update process you may be asked about updating configuration files.
 Choose to accept the maintainers versions. You will also be asked about
@@ -695,7 +701,7 @@ better to update the dashboard before updating the mcp components.
 
    sudo apt-get upgrade
    
-5. Disable Unused Services
+6. Disable Unused Services
 
 Archivematica 1.6.0 uses nginx as http server, and gunicorn as wsgi server. This means that some services used in Archivematica 1.5.0 should be stopped and disabled before performing the upgrade.
 
@@ -705,7 +711,7 @@ sudo service apache2 stop
 sudo update-rc.d apache2 disable
 
 
-6. Restart Services
+7. Restart Services
 
 .. code:: bash
 
