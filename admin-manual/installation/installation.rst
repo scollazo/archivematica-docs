@@ -627,12 +627,7 @@ Archiveamtica to 1.5.1 before following these instructions.
 While it is possible to upgrade a github based source install using ansible,
 these instructions do not cover that scenario.
 
-.. _upgrade-ubuntu:
-
-Upgrade on Ubuntu
------------------
-
-1. Backup
+**Backup first**
 
 Before starting any upgrade procedure on a production system, it is prudent to
 back up your system.  If you are using a virtual machine, take a snapshot of it
@@ -655,20 +650,12 @@ the '-p' portion of that command. If there is a problem during the upgrade
 process, you can restore your mysql database from this backup and try the
 upgrade again.
 
+.. _upgrade-ubuntu:
 
-2. Update pip
+Upgrade on Ubuntu
+-----------------
 
-This is used to install python dependencies for both the storage service and 
-the dashboard.  There is a _known issue: https://bugs.launchpad.net/ubuntu/+source/python-pip/+bug/1658844
-with the version of pip installed on Ubuntu 14.04, which makes this step necessary.
-
-.. code:: bash
-
-   sudo apt-get remove python-pip
-   wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
-   sudo python /tmp/get-pip.py
-
-2. Update Package Sources
+1. Update Package Sources
 
 .. code:: bash
 
@@ -679,7 +666,7 @@ with the version of pip installed on Ubuntu 14.04, which makes this step necessa
 
 Optionally you can remove the lines references packages.archivematica.org/1.5.x from /etc/apt/sources.list.
 
-3. Update Archivematica Storage Services
+2. Update Archivematica Storage Services
 
 
 .. code:: bash
@@ -687,7 +674,7 @@ Optionally you can remove the lines references packages.archivematica.org/1.5.x 
    sudo apt-get update
    sudo apt-get install archivematica-storage-service
 
-4. Update Application Container
+3. Update Application Container
 
 Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means that the old uwsgi server needs to be stopped and disabled after perfoming the upgrade.
 
@@ -696,7 +683,7 @@ Archivematica Storage Service 0.10.0 uses gunicorn as wsgi server. This means th
 +   sudo service uwsgi stop
 +   sudo update-rc.d uwsgi disable
 
-5. Update Archivematica
+4. Update Archivematica
 
 During the update process you may be asked about updating configuration files.
 Choose to accept the maintainers versions. You will also be asked about
@@ -706,21 +693,28 @@ better to update the dashboard before updating the mcp components.
 
 .. code:: bash
 
-   sudo apt-get install archivematica-common
-   sudo apt-get install archivematica-dashboard
-   sudo apt-get install archivematica-mcp-server
-   sudo apt-get install archivematica-mcp-client
+   sudo apt-get upgrade
+   
+5. Disable Unused Services
 
-
-5. Restart Services
+Archivematica 1.6.0 uses nginx as http server, and gunicorn as wsgi server. This means that some services used in Archivematica 1.5.0 should be stopped and disabled before performing the upgrade.
 
 .. code:: bash
 
-   sudo service uwsgi restart
+sudo service apache2 stop
+sudo update-rc.d apache2 disable
+
+
+6. Restart Services
+
+.. code:: bash
+
    sudo service nginx restart
+   sudo ln -s /etc/nginx/sites-available/dashboard.conf /etc/nginx/sites-enabled/dashboard.conf
    sudo service gearman-job-server restart
    sudo restart archivematica-mcp-server
    sudo restart archivematica-mcp-client
+   sudo start archivematica-dashboard
    sudo restart fits
    sudo freshclam
 
@@ -732,12 +726,6 @@ try this command instead:
 
    sudo restart gearman-job-server
 
-**Update Dashboard Configuration**
-
-Log into the Archivematica dashboard with your existing credentials.  Go to the administration tab,
-and click on 'general configuration' in the menu on the left.  You will see a new 'api key' property
-in the Storage Service configuration section.  Copy the api key you generated earlier, when creating
-a new Storage Service user, into this box and click save.
 
 .. _upgrade-centos:
 
