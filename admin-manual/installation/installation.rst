@@ -151,7 +151,7 @@ Installing Ubuntu Packages
 --------------------------
 
 Archivematica packages are hosted at packages.archivematica.org. This has been 
-introduced to allow one central place to store packages for multiple os'es.
+introduced to allow one central place to store packages for multiple OS's.
 
 1. Add Package Sources
 
