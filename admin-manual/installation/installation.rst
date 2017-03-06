@@ -144,11 +144,6 @@ Other combinations work, but are not covered in this documentation. Please
 see the ansible-archivematica-src repo, the deploy-pub repo and ask on the
 archivematica-tech mailing list for more details.
 
-After successfully installing all the software, using any of these methods,
- there is some configuration to complete in the dashboard. See
-
-* :ref:`Post Install Configuration <post-install-config>`
-
 
 .. _install-pkg-ubuntu:
 
