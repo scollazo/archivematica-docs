@@ -179,7 +179,7 @@ Elasticsearch comes from its own package repository
    sudo wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
    sudo sh -c 'echo "deb http://packages.elasticsearch.org/elasticsearch/1.7/debian stable main" >> /etc/apt/sources.list'
 
-#. Update your system 
+2. Update your system 
 
 Update to the most recent 14.04 release. This step will also fetch a list of 
 the software from the PPAs you just added to your system.
@@ -189,19 +189,19 @@ the software from the PPAs you just added to your system.
    sudo apt-get update
    sudo apt-get upgrade
 
-#. Install Elasticsearch
+3. Install Elasticsearch
 
 .. code:: bash
 
    sudo apt-get install elasticsearch
 
-#. Install the storage service package
+4. Install the storage service package
 
 .. code:: bash
 
    sudo apt-get install -y archivematica-storage-service
 
-#. Install pip.  
+5. Install pip.  
 
 This is used to install python dependencies for both the storage service and 
 the dashboard.  There is a known issue with the version of pip installed on 
@@ -212,14 +212,14 @@ Ubuntu 14.04, which makes this step necessary.
    wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
    sudo python /tmp/get-pip.py
 
-#. Configure the storage service
+6. Configure the storage service
 
 .. code:: bash
 
    sudo rm -f /etc/nginx/sites-enabled/default
    sudo ln -s /etc/nginx/sites-available/storage /etc/nginx/sites-enabled/storage
 
-#. Install the Archivematica packages 
+7. Install the Archivematica packages 
 
 Each of these packages can be installed separately, if necessary). 
 
@@ -229,13 +229,13 @@ Each of these packages can be installed separately, if necessary).
    sudo apt-get install -y archivematica-dashboard
    sudo apt-get install -y archivematica-mcp-client
 
-#. Configure the dashboard
+8. Configure the dashboard
 
 .. code:: bash
 
    sudo ln -s /etc/nginx/sites-available/dashboard.conf /etc/nginx/sites-enabled/dashboard.conf
 
-#. Start Elasticsearch 
+9. Start Elasticsearch 
 
 Start the Elasticsearch service and configure it to start automatically when 
 the system is rebooted. 
@@ -245,7 +245,7 @@ the system is rebooted.
    sudo service elasticsearch restart
    sudo update-rc.d elasticsearch defaults 95 10
 
-#. Start the remaining services
+10. Start the remaining services
 
 .. code:: bash
 
@@ -265,7 +265,7 @@ If you have trouble with the gearman command try this as an alternative:
 
    sudo restart gearman-job-server
 
-#. Post Install Configuration
+11. Post Install Configuration
 
 See :ref:`Post Install Configuration <post-install-config>`
 
@@ -277,7 +277,7 @@ Install CentOS/Redhat Packages
 
 Archivematica version 1.5.1 and higher support installation on CentOS/Redhat.
 
-#. Prerequisites
+1. Prerequisites
 
 Update your system
 
@@ -285,7 +285,7 @@ Update your system
 
    sudo yum update
 
-#. Extra repos:
+2. Extra repos:
 
 Some repositories need to be installed in order to fullfill the installation procedure:
 
@@ -321,7 +321,7 @@ Some repositories need to be installed in order to fullfill the installation pro
    enabled=1
    EOF'
 
-#. Service depencencies
+3. Service depencencies
 
 Common services like elasticsearch, mariadb and gearmand should be installed 
 and enabled before the archivematica install. It can be done with:
@@ -336,7 +336,7 @@ and enabled before the archivematica install. It can be done with:
    sudo -u root systemctl enable gearmand
    sudo -u root systemctl start gearmand
 
-#. Install Archivematica Storage Service
+4. Install Archivematica Storage Service
 
 * First, we install the packages:
 
@@ -371,7 +371,7 @@ and enabled before the archivematica install. It can be done with:
 
    The storage service will be avaliable at http://<ip>:8001
 
-#. Installing Archivematica Dashboard and MCP Server
+5. Installing Archivematica Dashboard and MCP Server
 
 * First, install the pacakges:
 
@@ -417,7 +417,7 @@ and enabled before the archivematica install. It can be done with:
 
    The dashboard will be avaliable at http://ip:81
 
-#. Installing Archivematica MCP client
+6. Installing Archivematica MCP client
 
 * First, we need to add some extra repos with the MCP Client dependencies:
 
@@ -467,7 +467,7 @@ After that, we can enable and start services
    sudo -u root systemctl enable fits-nailgun
    sudo -u root systemctl start fits-nailgun
 
-#. Finalizing installation
+7. Finalizing installation
 
 **Configuration**
 
@@ -479,7 +479,7 @@ If IPv6 is disabled, Nginx may refuse to start. If that is the case make sure th
 
 CentOS will install firewalld which will be running default rules likely blocking ports 81 and 8001. If you are not able to access the dashboard and storage service, check if firewalld is running. If it is, you will likely need to modify the firewall rules to allow access to ports 81 and 8001 from your location.
 
-#. Post Install Configuration
+8. Post Install Configuration
 
 See :ref:`Post Install Configuration <post-install-config>`
 
@@ -507,7 +507,7 @@ by creating your own ansible playbook to run them. See
 https://github.com/artefactual/deploy-pub/playbooks/archivematica for more 
 details.
 
-#. Install Dependencies
+1. Install Dependencies
 
 These instructions require VirtualBox, Vagrant, and Ansible
 
@@ -525,7 +525,7 @@ These instructions require VirtualBox, Vagrant, and Ansible
    If it is not up to date, you can download the newest version from the 
    `Vagrant website <https://www.vagrantup.com/downloads.html>`_ .
 
-#. Download Installer
+2. Download Installer
 
 Checkout the deployment repo:
 
@@ -533,7 +533,7 @@ Checkout the deployment repo:
 
       git clone https://github.com/artefactual/deploy-pub.git
 
-#. Dependencies
+3. Dependencies
 
 Download the Ansible roles:
 
@@ -542,7 +542,7 @@ Download the Ansible roles:
       cd deploy-pub/playbooks/archivematica
       ansible-galaxy install -f -p roles/ -r requirements.yml
 
-#. Install
+4. Install
 
 Create the virtual machine and provision it:
 
@@ -558,7 +558,7 @@ Create the virtual machine and provision it:
      be sure to save any work and be prepared to step away from your computer 
      while Archivematica is building.
 
-#. Re-provisioning
+5. Re-provisioning
 
 If there's an error, you can re-run the setup.
 
@@ -577,7 +577,7 @@ You can also access your Archivematica instance through the web browser:
 * Storage Service: `<http://192.168.168.192:8000>`_. Username: test, password: 
   test.
 
-# Post Install Configuration
+6. Post Install Configuration
 
 See :ref:`Post Install Configuration <post-install-config>`
 
@@ -589,14 +589,14 @@ Post Install Configuration
 
  successfully completing a new installation
 
-#. Test the storage service
+1. Test the storage service
 
 The storage service runs as a separate web application from the Archivematica 
 dashboard. Go to the following link in a web browser and log in as user *test* 
 with the password *test*: http://localhost:8000 (or use the IP address of the
 machine you have been installing on).
 
-#. New Storage Service User
+2. New Storage Service User
 
 Create a new administrative user in the Storage service. The storage service 
 has its own set of users. In the User menu in the Administrative tab of the 
@@ -604,14 +604,14 @@ storage service, add at least one administrative user, and delete or modify the
 test user. After you have created an administrative user, copy its API key to 
 your clipboard.
 
-#. Test the dashboard 
+3. Test the dashboard 
 
 You can login to the Archivematica dashboard and finish the installation in a 
 web browser: http://localhost (again, use the IP address of the machine you 
 have been installing on). When prompted, enter the URL of the Storage Service,
 the name of the administrative user, and that user's API key.
 
-#. Register your installation for full Format Policy Registry interoperability.
+4. Register your installation for full Format Policy Registry interoperability.
 
 Follow the instructions in the web browser to complete the installation.
 
@@ -636,43 +636,35 @@ these instructions do not cover that scenario.
 Upgrade on Ubuntu
 -----------------
 
-#. Update python
+1. Update pip
 
-This might be done on your system already, if you have been updating the operating system
-on an ongoing basis.
-
-.. code:: bash
-
-   apt-get update
-   apt-get install python-pip
-
-**Add source code repositories**
+This is used to install python dependencies for both the storage service and 
+the dashboard.  There is a known issue with the version of pip installed on 
+Ubuntu 14.04, which makes this step necessary.
 
 .. code:: bash
 
-   sudo add-apt-repository ppa:archivematica/externals
-   wget -O - https://packages.archivematica.org/1.5.x/key.asc | apt-key add -
-   echo 'deb [arch=amd64] http://packages.archivematica.org/1.5.x/ubuntu trusty main' >> /etc/apt/sources.list
+   wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+   sudo python /tmp/get-pip.py
 
-**Update Archivematica Storage Service**
+2. Update Package Sources
 
-Ensure that the default user 'test' exists in the Storage Service before updating (create it if it doesn't). Database migrations may not be correctly applied if not.
+.. code:: bash
+
+   sudo add-apt-repository --remove ppa:archivematica/externals
+   wget -O - https://packages.archivematica.org/1.6.x/key.asc | apt-key add -
+   echo 'deb [arch=amd64] http://packages.archivematica.org/1.6.x/ubuntu trusty main' >> /etc/apt/sources.list
+   echo 'deb [arch=amd64] http://packages.archivematica.org/1.6.x/ubuntu-externals trusty main' >> /etc/apt/sources.list
+
+3. Update Archivematica Storage Services
 
 .. code:: bash
 
    sudo apt-get update
    sudo apt-get install archivematica-storage-service
 
-**Create new Storage Service user**
 
-Archivematica Storage Service 0.8.0 introduces a new security feature - each user is assigned an API key.
-All api interactions with the storage service require the use of an api key, including from the Archivematica Dashboard.
-
-Log into the Storage Service with your existing credentials.  Go to the Administration tab, and then select 'users'
-from the menu on the left.  Create a new user.  Once you have finished creating the new user, copy the api key that
-is displayed on the 'edit user' page.  You will need this later after upgrading the Dashboard.
-
-**Update Archivematica**
+4. Update Archivematica
 
 It is always a good idea to make a backup of your archivematica database
 before performing any updates. Exact procedures for updating will depend on
@@ -701,31 +693,13 @@ better to update the dashboard before updating the mcp components.
    sudo apt-get install archivematica-mcp-server
    sudo apt-get install archivematica-mcp-client
 
-**(Optional) Update Elasticsearch**
 
-Archivematica 1.4.1 uses Elasticsearch version 1.4.  Archivematica 1.5.0 will work with any version of Elasticsearch from 1.4 to 1.7.5.  You do not have to upgrade Elasticsearch when upgrading Archivematica, although we recommend doing so, to make future upgrades easier.
-
-Instructions on how to upgrade can be found on the
-`Elasticsearch website <https://www.elastic.co/guide/en/elasticsearch/reference/1.3/setup-upgrade.html>`_.
-In general it should be possible to upgrade Elasticsearch on a standard Archivematica machine with the following commands:
-
-.. code:: bash
-
-   sudo /etc/init.d/elasticsearch stop
-   sudo echo "deb http://packages.elasticsearch.org/elasticsearch/1.7/debian stable main" >> /etc/apt/sources.list
-   sudo apt-get update
-   sudo apt-get install elasticsearch
-   sudo /etc/init.d/elasticsearch start
-
-You will be prompted with questions about modifying configuration files.  If you have not made any modifications to your Elasticsearch configuration, it should be safe to use the new versions of the configuration files that come with Elasticsearch.
-
-**Restart Services**
+5. Restart Services
 
 .. code:: bash
 
    sudo service uwsgi restart
    sudo service nginx restart
-   sudo /etc/init.d/apache2 restart
    sudo service gearman-job-server restart
    sudo restart archivematica-mcp-server
    sudo restart archivematica-mcp-client
